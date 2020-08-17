@@ -2,6 +2,8 @@ const User = require('../models/userModel');
 const Joi = require('@hapi/joi');
 const Schema = require('../validators/valid')
 const valid = require('../validators/valid')
+const userServices = require('../services/userServices')
+
 
 module.exports.postController =  async (req, res) =>{
 
@@ -12,14 +14,7 @@ module.exports.postController =  async (req, res) =>{
     }
     else{
         try{
-            let data = await User.create({
-                id: req.body.id,
-                username: req.body.username,
-                password: req.body.password,
-                fullName: req.body.fullName,
-                birthDay: req.body.birthDay,
-                gender:  req.body.gender    
-            })
+            let data = await userServices.createUser(req.body)
             res.json(data);
     
         }
@@ -39,12 +34,10 @@ module.exports.putController = async (req, res) =>{
     }
     else{
         try{
-            let data = await User.update(req.body,{
-                where: { 
-                    id: req.params.id
-                 }
-            }) 
+            let data = await userServices.updateOne(req.params.id, req.body)
 
+            console.log(data);
+            
             if(data == 1){
                 res.json("Đã cập nhật xong");
             }
@@ -60,12 +53,7 @@ module.exports.putController = async (req, res) =>{
 }
 
 module.exports.deleteController = async (req, res) =>{
-
-    let data = await User.destroy({
-        where: { 
-            id: req.params.id
-         }
-    })
+    let data = await userServices.deleteOne(req.params.id)
     if(data){
         res.json("Đã xóa xong");
     }
@@ -78,15 +66,11 @@ module.exports.deleteController = async (req, res) =>{
 module.exports.getOneController = async (req, res) =>{
     var id = req.params.id;
 
-    let data = await User.findOne({
-        where:{
-            id
-        }
-    })
+    let data = await userServices.getById(id);
     return res.json(data);
 }
 
 module.exports.getAllController = async (req, res) =>{
-    let data = await User.findAll({})
+    let data = await userServices.getAll()
     return res.json(data);
 }

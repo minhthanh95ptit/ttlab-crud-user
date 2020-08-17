@@ -1,51 +1,41 @@
 const User = require('../models/userModel');
 
-let createService = (noidung) =>{
-
-    User.create({
-        id: noidung.id,
-        username: noidung.username,
-        password: noidung.password,
-        fullName: noidung.fullName,
-        birthDay: noidung.birthDay,
-        gender: noidung.gender
-    })
-    
+function getAll(){
+    return User.findAll({});
 }
 
-let putService = (nodung,id) => {
-    User.update(noidung,{
-        where: { 
-            id
-         }
-    })
-  
-}
-
-let deleteService = (id) =>{
-    User.destroy({
-        where: { 
-            id
-         }
-    })
-}
-
-let getOneService = (id) =>{
-    User.findOne({
+function getById(id){
+    return User.findOne({
         where:{
             id
         }
     })
 }
 
-let getAllService = () =>{
-    User.findAll({})
+function createUser(user){
+    return User.create(user)
+}
+
+function updateOne(id, user){
+    return User.update(user,{
+        where:{
+            id: id
+        }
+    })
+}
+
+function deleteOne(id){
+    return User.destroy({
+        where:{
+            id
+        }
+    })
 }
 
 module.exports = {
-    createService,
-    putService,
-    deleteService,
-    getOneService,
-    getAllService
+    getById : getById,
+    getAll : getAll,
+    createUser: createUser,
+    updateOne: updateOne,
+    deleteOne: deleteOne
 }
