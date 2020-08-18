@@ -21,11 +21,13 @@
     "@hapi/joi": "^17.1.1",
     "express": "^4.17.1",
     "mysql2": "^2.1.0",
+    "random-birthday": "^1.0.1",
     "sequelize": "^5.22.3",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7"
   },
   "devDependencies": {
+    "faker": "^4.1.0",
     "nodemon": "^2.0.4"
   }
 }

@@ -1,7 +1,9 @@
-const User = require('../models/userModel');
+const User = require('../models/User');
+
+console.log(User);
 
 function getAll(){
-    return User.findAll({});
+    return User().findAll();
 }
 
 function getById(id){

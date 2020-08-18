@@ -1,4 +1,3 @@
-const User = require('../models/userModel');
 const Joi = require('@hapi/joi');
 const Schema = require('../validators/valid')
 const valid = require('../validators/valid')
